@@ -1,0 +1,265 @@
+<section class="content-header">
+      <h1>
+        <i class="icofont icofont-id-card"></i> Hospital Profile<span ng-if="status">( <a ui-sref="secure.hospitals" style="font-size: 18px;">Go Back</a> )</span>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Hospital Profile</li>
+      </ol>
+</section>
+<section class="content">
+
+      <div class="row">
+        <div class="col-md-4">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" src="../../assets/images/user.png" alt="User profile picture">
+
+              <h3 class="profile-username text-center">{{userData.name}}</h3>
+
+              <p class="text-muted text-center">{{userData.type | capitalize}} Hospital</p>
+
+              <ul class="list-group list-group-unbordered" style="margin-top: 15px;">
+                <li class="list-group-item">
+                  <b>Total Orders</b> <a class="pull-right">{{results.length}}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Approved Orders</b> 
+                  <a class="pull-right" ng-repeat="order in results | filter : {status : 'approved'} as approvedOrders track by $index" style="display: none;" ng-if="results"></a>
+                   <a class="pull-right">{{approvedOrders.length}}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Pending Orders</b> 
+                  <a class="pull-right" ng-repeat="order in results | filter : {status : 'pending'} as pendingOrders track by $index" style="display: none;" ng-if="results"></a>
+                   <a class="pull-right">{{pendingOrders.length}}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Rejected Orders</b> 
+                  <a class="pull-right" ng-repeat="order in results | filter : {status : 'rejected'} as rejectedOrders track by $index" style="display: none;" ng-if="results"></a>
+                   <a class="pull-right">{{rejectedOrders.length}}</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          <!-- About Me Box -->
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <div class="box-body" style="padding-top: 0px;margin-top: -20px;">
+              <strong><i class="fa fa-book margin-r-5"></i> Address</strong>
+
+              <p class="text-muted">
+                {{userData.address}}, {{userData.city}},
+              </p>
+              <p class="text-muted">
+                {{userData.state}}, Pin Code - {{userData.pin_code}}
+              </p>
+
+              <hr>
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i>Contact Details</strong>
+
+              <p class="text-muted">{{userData.email}}</p>
+              <p class="text-muted">{{userData.mobile_no}}</p>
+
+              <hr>
+
+              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-8">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
+              <li class=""><a href="#edit-profile" data-toggle="tab" aria-expanded="true">Edit Profile</a></li>
+              <li class=""><a href="#account-settings" data-toggle="tab" aria-expanded="false">Account Settings</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="timeline">
+                <!-- The timeline -->
+                <ul class="timeline timeline-inverse">
+                  <!-- timeline time label -->
+                  <span>
+                  <!-- timeline item -->
+                  <li ng-repeat="result in results track by $index">
+                    <i class="fa fa-envelope bg-blue" style="background:{{result.color}}!important;"></i>
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i> {{result.date | date}}, {{result.date | date:'HH:mm'}}</span>
+                      <h3 class="timeline-header"><a href="#">Order {{result.status | capitalize}}( Ref. ID- {{result.ref_id}} )</a></h3>
+                      <div class="timeline-body">
+                        {{result.description | limitTo:150}}...
+                      </div>
+                      <div class="timeline-footer text-right">
+                        <a class="btn btn-success btn-xs" ui-sref="secure.order_details({id : result.id})">View</a>
+                      </div>
+                    </div>
+                  </li>
+                  </span>
+                  <!-- END timeline item -->
+                </ul>
+              </div>
+              <!-- /.tab-pane -->
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="edit-profile">
+                <form class="form-horizontal edit-form" ng-submit="editProfile(userData)">
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputName" class="control-label">Name</label>
+                      <input type="text" ng-model="userData.name" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputEmail" class="control-label">Email</label>
+                      <input type="email" ng-model="userData.email"  class="form-control" id="inputEmail" placeholder="Email" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-6">
+                      <label for="inputType" class="control-label">Type</label>
+                      <input type="text" ng-model="userData.type"  class="form-control" id="inputType" placeholder="Type" disabled>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="inputJoined" class="control-label">Joined On</label>
+                      <input type="date" ng-model="userData.created_on"  class="form-control" id="inputJoined" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputAdd" class="control-label">Address</label>
+                      <input type="text" class="form-control" ng-model="userData.address"  min="0" id="inputAdd" placeholder="Address">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-6">
+                      <label for="inputCity" class="control-label">City</label>
+                      <input type="text" class="form-control" ng-model="userData.city"  min="0" id="inputCity" placeholder="City">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="inputState" class="control-label">State</label>
+                      <input type="text" class="form-control" ng-model="userData.state"  min="0" id="inputState" placeholder="State">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-6">
+                      <label for="inputPin" class="control-label">Pin Code</label>
+                      <input type="number" class="form-control" ng-model="userData.pin_code"  min="0" id="inputPin" placeholder="Pin Code">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="inputMob" class="control-label">Mobile Number</label>
+                      <input type="number" class="form-control" ng-model="userData.mobile_no"  min="0" id="inputMob" placeholder="Mobile Number">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 text-right">
+                      <button type="submit" class="btn btn-danger" style="width: 150px;">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane" id="account-settings">
+                <fieldset style="border: solid 1px #ccc;padding: 10px;margin-top:20px;margin-bottom: 50px;">
+                <legend class="bg-yellow" style="padding: 7px;text-align: center;">
+                  Change Password
+                </legend>
+                <form class="form-horizontal edit-form row" ng-submit="changePwd(pwdData)">
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputChangeName" class="control-label">Name</label>
+                      <input type="text" class="form-control" ng-model="userData.name" id="inputChangeName" placeholder="Name" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputChangeEmail" class="control-label">Email</label>
+                      <input type="email" class="form-control" ng-model="userData.email" id="inputChangeEmail" placeholder="Email" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputOld" class="control-label">Old Password</label>
+                      <input type="password" class="form-control" ng-model="pwdData.old_password" id="inputOld" placeholder="Old Password" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputNew" class="control-label">New Password</label>
+                      <input type="password" class="form-control" ng-model="pwdData.new_password" id="inputNew" placeholder="New Password" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputConfirm" class="control-label">Confirm Password</label>
+                      <input type="password" class="form-control" ng-model="pwdData.confirm_password" id="inputConfirm" placeholder="Confirm Password" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" ng-model="pwdData.checked"> I agree to the <a href="">terms and conditions</a>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 text-right">
+                      <button type="submit" class="btn btn-danger" style="width: 150px;">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+              <fieldset style="border: solid 1px #ccc;padding: 10px;margin-top:20px;margin-bottom: 20px;" style="background: rgba(221, 44, 0, 0.22)">
+                <legend class="bg-red" style="padding: 7px;text-align: center;">
+                  Account Status
+                </legend>
+                <form class="form-horizontal edit-form row" ng-submit="changeStatus(statData)">
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputCurrent" class="control-label">Current Status</label>
+                      <input type="text" class="form-control" ng-model="userData.status" id="inputCurrent" placeholder="Current Status" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <label for="inputPwd" class="control-label">Account Password</label>
+                      <input type="password" class="form-control" ng-model="statData.password" id="inputPwd" placeholder="Enter Password" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" ng-model="statData.checked"> I agree to the <a href="">terms and conditions</a>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 text-right">
+                      <button type="submit" class="btn btn-danger" style="width: 150px;">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+</section>

@@ -1,0 +1,86 @@
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar" style="height: auto;">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="image col-md-12">
+          <img ng-src="{{userData.image}}" class="img-circle" alt="User Image">
+        </div>
+        <div class="info col-md-12">
+          <p>{{userData.name}}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i>{{userData.type | capitalize}} Hospital</a>
+        </div>
+      </div>
+      <hr style="width: 85%;margin-top: 10px;margin-bottom: 10px;">
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu tree" data-widget="tree">
+        <li ng-class="getClass('secure.dashboard')" class="treeview menu-open" ng-if="access[0]">
+          <a ui-sref="secure.dashboard">
+            <i class="icofont icofont-home"></i> 
+            <span>Dashboard</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
+        <li ng-class="getClass('secure.profile')" ng-if="access[1]">
+          <a ui-sref="secure.profile">
+            <i class="icofont icofont-id-card"></i> 
+            <span>Profile</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
+        <li ng-class="getClass('secure.hospitals')" ng-if="access[2]">
+          <a ui-sref="secure.hospitals">
+            <i class="icofont icofont-hospital"></i> 
+            <span>Hospitals</span>
+          </a>
+        </li>
+        <li ng-class="getClass('secure.store')" ng-if="access[3]">
+          <a ui-sref="secure.store">
+            <i class="icofont icofont-search-alt-1"></i> 
+            <span>Live Store</span>
+          </a>
+        </li>
+        <li ng-class="getClass('secure.donate_form')" class="treeview" ng-if="access[4]">
+          <a ui-sref="secure.donate_form">
+            <i class="icofont icofont-first-aid-alt"></i>
+            <span>Donate Equipments</span>
+          </a>
+        </li>
+        <li ng-class="getClass('secure.orders')" class="treeview" ng-if="access[5]">
+          <a ui-sref="secure.orders">
+            <i class="icofont icofont-fork-lift"></i>
+            <span>Track Orders</span>
+          </a>
+        </li>
+        <li ng-class="getClass('secure.shopping_cart')" class="treeview" ng-if="access[6]">
+          <a ui-sref="secure.shopping_cart">
+            <i class="icofont icofont-cart-alt"></i>
+            <span>Shopping Cart</span>
+          </a>
+        </li>
+        <li ng-class="getClass('secure.history')" class="treeview" ng-if="access[7]">
+          <a ui-sref="secure.history">
+            <i class="icofont icofont-files"></i>
+            <span>History</span>
+          </a>
+        </li>
+        <li ng-class="getClass('secure.statistics-report')" class="treeview" ng-if="access[8]">
+          <a ui-sref="secure.statistics-report">
+            <i class="icofont icofont-list"></i>
+            <span>Statistics Report</span>
+          </a>
+        </li>
+        <li class="treeview" ng-if="access[9]">
+          <a href="" ng-click="logout()">
+            <i class="icofont icofont-logout"></i> 
+            <span>Logout</span>
+          </a>
+        </li>
+   	</ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>

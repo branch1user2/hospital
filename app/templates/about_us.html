@@ -1,0 +1,53 @@
+<!-- bread-crumb start here -->
+<div class="bread-crumb">
+	<img src="../assets/images/banner_top.jpg" class="img-responsive" alt="banner-top" title="banner-top">
+	<div class="container">
+		<div class="matter">
+			<h2>about us</h2>
+			<ul class="list-inline">
+				<li><a href="/">HOME</a></li>
+				<li><a href="/about-us">about us</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- bread-crumb end here -->
+<!-- about start here -->
+<div class="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-7 col-xs-12 commontop text-left">
+				<h4>about our health & care hospital</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan.</p>
+				<hr>
+			</div>
+			<div class="col-sm-7 col-xs-12">
+				<p class="des">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id.</p>
+				<button type="button" class="btn-primary" onclick="location.href='/about-us'">read more <i class="icofont icofont-curved-double-right"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- about end here -->
+<!-- service start here -->
+<div class="service" style="background:#f5f5f5">
+	<div class="container">
+		<div class="row" style="margin-bottom: 50px;">
+			<div class="col-sm-12 col-xs-12 commontop text-center" style="margin-bottom:50px;">
+				<h4>our services</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur placerat nulla, in suscipit erat sodales id. Nullam ultricies eu turpis at accumsan. Mauris a sodales mi, eget lobortis nulla. </p>
+				<hr>
+			</div>
+			<!-- ng-repeat on services start here -->
+			<div class="col-sm-4 col-xs-12" ng-repeat="service in services track by $index"> 
+				<div class="box text-center">
+					<img ng-src="{{service.image}}" class="img-responsive" alt="icon" title="icon" ng-style="{width: ($index == 0) ? '79px' : '80px'}"/>
+					<h4>{{service.name}}</h4>
+					<p>{{service.description}}</p>
+				</div>
+			</div>
+			<!-- ng-repeat on services end here -->
+		</div>
+	</div>
+</div>
+<!-- service end here -->
